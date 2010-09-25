@@ -28,4 +28,4 @@ mrproper: clean
 
 .Phony: test
 test: $(EXEC)
-	@./$(EXEC) || true
+	-./$(EXEC)
