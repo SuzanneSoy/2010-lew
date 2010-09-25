@@ -10,7 +10,8 @@ int main(int argc, char** argv) {
 	}
 	
 	SDL_SetVideoMode(640, 480, 24, SDL_HWSURFACE);
+	SDL_WM_SetCaption("Lew", "lew.png");
 	
 	SDL_Quit();
-	return 0;
+	return EXIT_SUCCESS;
 }
