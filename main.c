@@ -9,7 +9,7 @@ int main(int argc, char** argv) {
 		exit(EXIT_FAILURE);
 	}
 	
-	
+	SDL_SetVideoMode(640, 480, 24, SDL_HWSURFACE);
 	
 	SDL_Quit();
 	return 0;
