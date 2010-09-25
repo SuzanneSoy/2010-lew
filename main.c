@@ -1,14 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL/SDL.h>
+#include "erreurs.h"
 
-#define die(msg) {\
-	fprintf(stderr, msg "\n"); \
-	fprintf(stderr, "  %s\n", SDL_GetError()); \
-	exit(EXIT_FAILURE); \
-}
-
-int main(int argc, char** argv) {
+SDL_Surface* init() {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		die("Erreur lors de l'initialisation de SDL :");
 	}
@@ -20,11 +15,21 @@ int main(int argc, char** argv) {
 	}
 	SDL_WM_SetCaption("Lew", "lew.png");
 	
+	return fenetre;
+}
+
+void quit() {
+	SDL_Quit();
+	exit(EXIT_SUCCESS);
+}
+
+int main(int argc, char** argv) {
+	SDL_Surface* fenetre = init();
+	
 	SDL_FillRect(fenetre, NULL, SDL_MapRGB(fenetre->format, 255, 0, 128));
 	SDL_Flip(fenetre);
 	
 	while (1);
 	
-	SDL_Quit();
-	return EXIT_SUCCESS;
+	quit();
 }
