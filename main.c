@@ -5,6 +5,11 @@
 
 #define PROFONDEUR 24
 
+typedef enum {
+	TRUE = (0==0),
+	FALSE = (0==1)
+} bool;
+
 SDL_Surface* init() {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		die("Erreur lors de l'initialisation de SDL :");
@@ -39,7 +44,17 @@ int main(int argc, char** argv) {
 	SDL_BlitSurface(bloc, NULL, fenetre, &position);
 	SDL_Flip(fenetre);
 	
-	while (1);
+	bool boucle = TRUE;
+	SDL_Event evenement;
+	while (boucle) {
+		SDL_WaitEvent(&evenement);
+		switch (evenement.type) {
+			case SDL_QUIT:
+			case SDL_KEYDOWN:
+				boucle = FALSE;
+				break;
+		}
+	}
 	
 	SDL_FreeSurface(bloc);
 	
