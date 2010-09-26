@@ -15,7 +15,8 @@ SDL_Surface* init() {
 	if (fenetre == NULL) {
 		die("Erreur lors de la création de la fenêtre.");
 	}
-	SDL_WM_SetCaption("Lew", "lew.png");
+	SDL_WM_SetCaption("Lew", NULL);
+	SDL_WM_SetIcon(SDL_LoadBMP("icone.bmp"), NULL);
 	
 	SDL_FillRect(fenetre, NULL, SDL_MapRGB(fenetre->format, 0, 0, 0));
 	SDL_Flip(fenetre);
