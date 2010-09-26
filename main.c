@@ -10,6 +10,9 @@ typedef enum {
 	FALSE = (0==1)
 } bool;
 
+// Variable globale boucle.
+bool boucle = TRUE;
+
 SDL_Surface* init() {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
 		die("Erreur lors de l'initialisation de SDL :");
@@ -34,6 +37,15 @@ void quit() {
 	exit(EXIT_SUCCESS);
 }
 
+void clavier(SDL_Event* ev) {
+	switch (ev->key.keysym.sym) {
+		case SDLK_ESCAPE:
+		case SDLK_q:
+			boucle = FALSE;
+			break;
+	}
+}
+
 int main(int argc, char** argv) {
 	SDL_Surface* fenetre = init();
 	
@@ -44,14 +56,15 @@ int main(int argc, char** argv) {
 	SDL_BlitSurface(bloc, NULL, fenetre, &position);
 	SDL_Flip(fenetre);
 	
-	bool boucle = TRUE;
 	SDL_Event evenement;
 	while (boucle) {
 		SDL_WaitEvent(&evenement);
 		switch (evenement.type) {
 			case SDL_QUIT:
-			case SDL_KEYDOWN:
 				boucle = FALSE;
+				break;
+			case SDL_KEYDOWN:
+				clavier(&evenement);
 				break;
 		}
 	}
